@@ -7,10 +7,9 @@
 <body>
 			<h4>{{year}}年{{month}}月</h4>
 	<ul>
-		{% for author,articles in articleStat.items %}
+		{% for author, articles in articleStat %}	
 			<li>
 			<a href="/importnewstat/author/{{author.id}}">
-			
 			
 			{% if author.isPayAuthor %}
 				<img src="/site_media/pay.gif"/>

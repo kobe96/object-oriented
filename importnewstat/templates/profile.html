@@ -8,14 +8,16 @@
 	author：<a href="{{author.link}}" target="blank">{{author.name}}</a><br>
 	weibo：<a href="{{author.weibo}}" target="blank">{{author.weibo}}</a><br>
 	email：{{author.email}}<br>
-	qq：{{author.qq}}<br><br>
+	qq：{{author.qq}}<br>
+	简介：{{author.descr}}<br><br>
 	
-	发表过的文章：
+	曾发表过的文章：
 	
 	<ul>
 		{% for article in articles %}
 			<li>
 				<a href="{{article.link}}" target="blank">{{article.title}}</a>
+				{{article.addTime}}
 			</li>
 		{% endfor %}
 	</ul>
