@@ -16,7 +16,11 @@ def stat(request,year,month):
     month=int(month)
     
     articleStat={}
-    authors = Author.objects.all()
+    authors = Author.objects.all().order_by("-isPayAuthor")
+
+    print authors
+    
+    
     
     startDate=datetime.date(year,month,1)
     days=calendar.monthrange(year, month)[1] #当前月份的天数
@@ -25,6 +29,7 @@ def stat(request,year,month):
     for author in authors:
         articles = Article.objects.filter(Author=author,addTime__range=(startDate,endDate))
         articleStat[ author]=articles
+    
     
     next_month=""
     pre_month=""
@@ -58,7 +63,9 @@ def stat_ccurrent_month(request):
     return stat(request, year, month)
     
 
-
+'''
+    作者信息
+'''
 def authorprofile(request,author):
     
     authorId=int(author)

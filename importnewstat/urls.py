@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from importnewstat.views import *
+from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
@@ -23,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^importnewstat/stat/$',stat_ccurrent_month),
     url(r'importnewstat/author/(\d)',authorprofile),
     
-    url(r'^importnewstat/admin/', include(admin.site.urls))
-    
+    url(r'^importnewstat/admin/', include(admin.site.urls)),
+    url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
     
 )

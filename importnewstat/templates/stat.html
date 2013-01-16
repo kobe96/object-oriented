@@ -9,7 +9,17 @@
 	<ul>
 		{% for author,articles in articleStat.items %}
 			<li>
-			<a href="/importnewstat/author/{{author.id}}">{{author}}</a>
+			<a href="/importnewstat/author/{{author.id}}">
+			
+			
+			{% if author.isPayAuthor %}
+				<img src="/site_media/pay.gif"/>
+				{{author}}
+			{% else %}
+				{{author}}
+			{% endif %}
+			
+			</a>
 				<ul>
 					{% for article in articles %}
 						<li>
