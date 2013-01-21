@@ -11,6 +11,8 @@ import datetime
 import calendar
 import articleStat
 
+#select author.name,count(article.id) from 
+#articleStat_author as author,articleStat_article as article where author.id=article.Author_id and article.addTime between 20130101 and 20130228 group by author.name order by  count(article.id) desc;
 #统计指定月份的作者的文章
 def stat(request,year,month):
     year=int(year)
@@ -18,11 +20,9 @@ def stat(request,year,month):
     
     articleStat=[]
     authors = Author.objects.all().order_by("-isPayAuthor")
+    
+   #authors = Author.objects.filter()
 
-    print authors
-    
-    
-    
     startDate=datetime.date(year,month,1)
     days=calendar.monthrange(year, month)[1] #当前月份的天数
     endDate=datetime.date(year,month,days)
@@ -31,8 +31,6 @@ def stat(request,year,month):
         articles = Article.objects.filter(Author=author,addTime__range=(startDate,endDate))
         
         articleStat.append((author,articles))
-    
-    print articleStat
     
     next_month=""
     pre_month=""

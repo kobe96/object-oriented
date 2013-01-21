@@ -6,7 +6,7 @@ Created on Dec 14, 2012
 '''
 from django.contrib import admin
 
-from articleStat.models import Author,Article,AuthorModelForm
+from articleStat.models import Author,Article#,AuthorModelForm
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -17,7 +17,7 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display=('name','email','weibo','addTime','qq',)
     search_fields=('name',)
     ordering=('addTime',)
-    form=AuthorModelForm
+   # form=AuthorModelForm
 
     
     

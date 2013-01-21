@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Profile</title>
+</head>
+<body>
+	author：<a href="{{author.link}}" target="blank">{{author.name}}</a><br>
+	weibo：<a href="{{author.weibo}}" target="blank">{{author.weibo}}</a><br>
+	email：{{author.email}}<br>
+	qq：{{author.qq}}<br>
+	简介：{{author.descr}}<br><br>
+	
+	曾发表过的文章：
+	
+	<ul>
+		{% for article in articles %}
+			<li>
+				<a href="{{article.link}}" target="blank">{{article.title}}</a>
+				{{article.addTime}}
+			</li>
+		{% endfor %}
+	</ul>
+				总共：{{articles|length}}篇 <br>
+				<a href="/importnewstat/stat">首页</a>
+	
+</body>
+</html>

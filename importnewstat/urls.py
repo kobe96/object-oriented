@@ -27,4 +27,6 @@ urlpatterns = patterns('',
     url(r'^importnewstat/admin/', include(admin.site.urls)),
     url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
     
+    url(r'^story/',include('ourstory.urls'))
+    
 )

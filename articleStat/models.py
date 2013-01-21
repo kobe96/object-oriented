@@ -10,7 +10,7 @@ class Author(models.Model):
     weibo=models.CharField(max_length=50)
     qq=models.CharField(max_length=20,null=True,blank=True)
     addTime=models.DateTimeField(null=True)
-    descr=models.CharField(max_length=500,blank=True)
+    descr=models.TextField(blank=True)
     #是否为支付作者
     isPayAuthor=models.BooleanField(default=True)
     isDelete=models.BooleanField()
@@ -30,12 +30,12 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title
     
-    
+'''
 from django import forms
 class AuthorModelForm(forms.ModelForm):
     descr = forms.CharField(widget=forms.Textarea)
     class Meta:
         model=Author
-
+'''
 
     
