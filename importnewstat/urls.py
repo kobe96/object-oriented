@@ -17,16 +17,25 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    #url(r'^admin/', include(admin.site.urls)),
     
     #^(0?[1-9]|1[0-2])$
+    url(r'^$',stat_current_month),
     url(r"stat/date/(\d{4})([1-9]|1[0-2])$", stat),
-    url(r'^importnewstat/stat/$',stat_ccurrent_month),
+    url(r'^importnewstat/stat/$',stat_current_month),
     url(r'importnewstat/author/(\d)',authorprofile),
     
     url(r'^importnewstat/admin/', include(admin.site.urls)),
     url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.STATIC_PATH}),
     
-    url(r'^story/',include('ourstory.urls'))
+    url(r'^story/',include('ourstory.urls')),
     
+    url(r'^importnewstat/authorlist/$',authorlist),
+    
+    url(r'^importnewstat/mail$',auto_send_mail),
+    
+    url(r'^importnewstat/cron_mail$',cron_send_mail),
+    
+    url(r'^importnewstat/thanks/$',thanks),
+     
 )

@@ -64,6 +64,8 @@ STATIC_URL = '/static/'
 
 STATIC_PATH='./medias'
 
+APPEND_SLASH = False
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -157,3 +159,9 @@ LOGGING = {
         },
     }
 }
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT='25'
+EMAIL_HOST_USER='lzjun567@gmail.com'
+EMAIL_HOST_PASSWORD='yourpassword'
+EMAIL_USE_TLS=True
