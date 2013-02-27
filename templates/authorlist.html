@@ -3,31 +3,95 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>作者信息</title>
+<link rel="stylesheet" type="text/css" href="/site_media/common.css" />
+
+<script language="JavaScript" type="text/javascript"
+	src="/site_media/jquery.js"></script>
+
+<script type="text/javascript" language="JavaScript">
+	$(function(){
+		
+		$(".author_name").bind('mouseover',function(){
+			
+			$(this).attr('title','查看更多');
+			
+		})
+		
+		$(".author_name").bind("click",function(){
+			
+			//alert("hello");
+			
+			var id=$(this).attr('id')
+			var $obj = $(this);
+			//alert(id)
+			$.ajax({
+				
+				type:"POST",
+				url:"/importnewstat/author/"+id,
+				data:"",
+				success:function(data){
+					//alert(html);
+					//alert(html);
+					//alert($obj.html());
+					//$obj.parent().append(html);
+					
+					var html = '<p>简介：'+data.descirption+"</p>曾发表过的文章：<br>"
+					//data = eval(data);
+					var arr =  eval(data.articles);
+					
+					var length = arr.length
+					
+					if(length>0){
+						html+="<ul>"
+					}
+					
+					for(i=0;i<length;i++){
+					
+						
+						
+						html+="<li><a href='"+arr[i].fields.link+"' target='blank'>"+arr[i].fields.title+"</a>"+arr[i].fields.addTime+"</li>";
+						
+					}
+					html += '</ul>';
+					
+					var details = $obj.parent().children().last();
+					
+					
+					details.toggle(function(){
+						details.html(html);
+					})
+					
+					
+				}
+				
+			});
+			
+			
+			
+		});
+	});
+		
+
+</script>
+
 </head>
 <body>
+	<div class="dashboard">
+		个人信息
+		<ul class="authorlist">
+			{% for author in authors %}
+			<li>
+				<div class="author">
+					<a class="author_name" id="{{author.id}}"> {{author}} </a> <br>
+					<br>
+					<!--  -->
+					weibo：<a href="{{author.weibo}}" target="blank">{{author.weibo}}</a>
 
-	<ul>
-		
-		{% for author in authors %}
-		<li>
-			<a href="/importnewstat/author/{{author.id}}">
-			
-			{% if author.isPayAuthor %}
-				<img src="/site_media/pay.gif"/>
-				{{author}}
-			{% else %}
-				{{author}}
-			{% endif %}
-			<br>
-			weibo：<a href="{{author.weibo}}" target="blank">{{author.weibo}}</a><br>
-			email：{{author.email}}<br>
-			qq：{{author.qq}}<br>
-			简介：{{author.descr}}<br><br>
-	
-			</a>
-			</li>
-		{% endfor %}
-	</ul>
-		
+					<br> email：{{author.email}}<br> qq：{{author.qq}}<br>
+					<div class="details"></div>
+				</div>
+			</li> {% endfor %}
+		</ul>
+	</div>
 </body>
 </html>

@@ -97,11 +97,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    #'django.middleware.csrf.CsrfResponseMiddleware',
     #'django.contrib.locale.LocaleMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
 ROOT_URLCONF = 'importnewstat.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'account',
     'django.contrib.admin',
     'ourstory',
+    'systemlog',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -163,5 +164,5 @@ LOGGING = {
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT='25'
 EMAIL_HOST_USER='lzjun567@gmail.com'
-EMAIL_HOST_PASSWORD='yourpassword'
+EMAIL_HOST_PASSWORD='xxx'
 EMAIL_USE_TLS=True

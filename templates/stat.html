@@ -5,39 +5,9 @@
 <title>Statatics</title>
 </head>
 <body>
-			<h4>{{year}}年{{month}}月</h4>
-	<ul>
-		{% for author, articles in articleStat %}	
-			<li>
-			<a href="/importnewstat/author/{{author.id}}">
-			
-			{% if author.isPayAuthor %}
-				<img src="/site_media/pay.gif"/>
-				{{author}}
-			{% else %}
-				{{author}}
-			{% endif %}
-			
-			</a>
-				<ul>
-					{% for article in articles %}
-						<li>
-							<a href="{{article.link}}" target="blank">
-							{{article.title}}
-							</a>
-							{% if article.duration == 2 %}
-								★
-							{% endif %}
-						</li>
-					{% endfor %}
-				</ul>
-				总共：{{articles|length}}篇
-				<hr>
-			</li>
-		{% endfor %}
-	
-	</ul>
-	
+
+{% include "mail_template.html" %}
+
 <a href="/importnewstat/stat/date/{{pre_month}}">上月</a>
 	 &nbsp&nbsp&nbsp&nbsp
 <a href="/importnewstat/stat/date/{{current_month}}">当前</a>
@@ -48,7 +18,7 @@
 	
 <br>
 <br>
-<a href="/importnewstat/authorlist/"">个人信息列表</a>
+<a href="/importnewstat/authorlist">个人信息列表</a>
 	
 	
 </body>

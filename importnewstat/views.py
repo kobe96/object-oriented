@@ -7,15 +7,14 @@ Created on Dec 14, 2012
 
 from django.shortcuts import  render_to_response
 from articleStat.models import Author, Article
+from django.shortcuts import  HttpResponse
 import datetime
 import calendar
-from  django.core.mail import send_mail
-from django.shortcuts import  HttpResponseRedirect
-from django.shortcuts import  HttpResponse
-
-from django.core.mail import BadHeaderError
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import EmailMultiAlternatives
+from django.utils import simplejson
+
+from django.core import serializers
+
 
 #select author.name,count(article.id) from 
 #articleStat_author as author,articleStat_article as article where author.id=article.Author_id and article.addTime between 20130101 and 20130228 group by author.name order by  count(article.id) desc;
@@ -73,11 +72,34 @@ def stat_current_month(request):
 '''
     作者详细信息
 '''
+@csrf_exempt 
 def authorprofile(request,author):
+    
+    if request.method=="POST":
+        dict = {}
+        dict['message']="helloworld"
+        print dict['message']
+        print author
+        authorId=int(author)
+        author = Author.objects.get(id=authorId)
+        articles=Article.objects.filter(Author=author)
+        
+        dict['descirption']=author.descr
+        
+        
+        data = serializers.serialize('json',articles)
+        
+        print type(data)
+        
+        dict['articles']=data
+        
+        json=simplejson.dumps(dict)
+        return HttpResponse(json, mimetype="application/json")
+        #return HttpResponse(simplejson.dumps({'result':'success'}),mimetype='application/javascript')
+    
     
     authorId=int(author)
     author = Author.objects.get(id=authorId)
-    
     articles=Article.objects.filter(Author=author)
     
     return render_to_response("profile.html",{"author":author,"articles":articles})
@@ -93,44 +115,6 @@ def authorlist(request):
     return render_to_response("authorlist.html",{"authors":authors})
 
 
-
-'''
-
-'''
-@csrf_exempt
-def auto_send_mail(request):
-    
-    if request.method=='GET':
-        return render_to_response('mail.html',{})
-    
-    subject = request.POST.get('subject','')
-    message = request.POST.get('message','')
-    to_email =request.POST.get('to_email','')
-    
-    if subject and message and to_email:
-        try:
-            print subject,message,to_email
-            send_mail(subject,message,'lzjun567@gmail.com',['lzjun567@qq.com'])
-        except BadHeaderError:
-            return HttpResponse('Invalid header found')
-        return HttpResponseRedirect('/importnewstat/thanks/')
-    else:
-        return HttpResponse('make sure all filed are entered and valid')
-            
-
-def cron_send_mail(request):
-    subject=''
-    from_email,to='lzjun567@gmail.com','lzjun567@qq.com'
-    
-    text_content = 'this is an important message'
-    html_content = stat(request,2013,1,"mail_template.html")
-    html_content = str(html_content).replace("Content-Type: text/html; charset=utf-8","")
-    print html_content
-    msg = EmailMultiAlternatives(subject,text_content,from_email,[to])
-    msg.attach_alternative(html_content, 'text/html')
-    msg.send()
-    return HttpResponseRedirect('/importnewstat/thanks/')
-    
   
 
 def thanks(reqest): 
