@@ -66,6 +66,9 @@
 			<li>
 				<div class="author">
 					<a class="author_name" id="{{author.id}}"> {{author}} </a> <br>
+					{% if author.isPayAuthor %}
+						*
+					{% endif %}
 					<br><br>
 					<!--  -->
 					weibo：<a href="{{author.weibo}}" target="blank">{{author.weibo}}</a>

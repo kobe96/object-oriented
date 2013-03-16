@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//articleStat/admin.py=UTF-8
+encoding//articleStat/management/commands/mail.py=UTF-8
+encoding//articleStat/management/commands/scratch.py=UTF-8
+encoding//articleStat/models.py=UTF-8
+encoding//importnewstat/views.py=UTF-8

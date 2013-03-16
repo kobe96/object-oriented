@@ -24,7 +24,7 @@ def stat(request,year,month,template='stat.html'):
     month=int(month)
     
     articleStat=[]
-    authors = Author.objects.all().order_by("-isPayAuthor")
+    authors = Author.objects.filter(isDelete=False).order_by("-isPayAuthor")
     
     startDate=datetime.date(year,month,1)
     days=calendar.monthrange(year, month)[1] #当前月份的天数
