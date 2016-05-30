@@ -19,7 +19,17 @@ void print::OutputResult(double result, string error, string argv)
 	if (out.is_open())
 	{
 		if (error == "")
-			out << result << endl;
+		{
+			if ((int)result == result)
+			{
+				out << result << endl;
+			}
+			else
+			{
+				out.precision(3);
+				out << setiosflags(ios::fixed) <<result << endl;
+			}
+		}
 		else
 			out << "error" << endl;
 	}
@@ -30,4 +40,3 @@ void print::OutputResult(double result, string error, string argv)
 
 	out.close();
 }
-

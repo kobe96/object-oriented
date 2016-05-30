@@ -11,7 +11,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	int ss=0;
+	int ss = 0;
 	int pdinput = 0;
 	double result;
 	int pdlenth = 0;
@@ -103,7 +103,15 @@ int main(int argc, char* argv[])
 				result = ca.read(midsection);
 				pr.PrintStringQueue(midsection);
 				cout << "= ";
-				cout << result << endl;
+				if ((int)result == result)
+				{
+					cout << result << endl;
+				}
+				else
+				{
+					cout.precision(3);
+					cout << setiosflags(ios::fixed) << result << endl;
+				}
 
 			}
 			else
@@ -117,7 +125,15 @@ int main(int argc, char* argv[])
 			{
 				midsection = sc.ToStringQueue(input);
 				result = ca.read(midsection);
-				cout << result << endl;
+				if ((int)result == result)
+				{
+					cout << result << endl;
+				}
+				else
+				{
+					cout.precision(3);
+					cout << setiosflags(ios::fixed) << result << endl;
+				}
 			}
 			else
 			{
